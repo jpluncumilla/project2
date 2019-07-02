@@ -5,4 +5,9 @@ branches:
   - master
 cache:
   directories:
+<<<<<<< HEAD
     - node_modules
+
+=======
+    - node_modules
+>>>>>>> 7ed1af6b47fc4c273664709eeb8254605a6a9abd
