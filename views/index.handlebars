@@ -1,25 +1,50 @@
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col-8 offset-2">
+      <div class="col-10">
         <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
+        <h2>Disaster Relief App</h2>
+      </div>
+    </div> 
+    <div class="row top-buffer">
+      <div class="col-10">
+        <h3>Registration Form</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Num Of People</th>
+              <th>Add a Person</th>
+              <th>Delete Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each houses}}
+            <tr id="form-row">
+              <td>
+                {{this.address}}
+              </td>
+              <td>
+                {{this.People.length}}
+              </td>
+              <td><a href="houses/{{this.id}}/people">Add A person</a></td>
+              <td><button class="btn btn-danger float-right delete">ｘ</button></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+         <form class="clearfix mb-4" action="POST">
+                <div class="form-group">
+                  <input type="text" id="house-address" class="form-control" aria-describedby="house-text" placeholder="Please enter your Address">
+                  </div>
+                  <button id="submit" class="btn btn-primary float-right">Add Your Address</button>
+              
+              </form>
+        <h3>Houses:</h3>
+        <ul id="house-list" class="list-group">
+          {{#each houses}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
+            <a href="example/{{this.id}}">{{this.address}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
@@ -27,7 +52,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

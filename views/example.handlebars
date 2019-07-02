@@ -1,19 +1,47 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 offset-2">
-      <div class="card mt-4">
-        <div class="card-body">
-          <h5 class="card-title">Example</h5>
-          <p>
-            <strong>ID</strong>: {{example.id}}</p>
-          <p>
-          <p>
-            <strong>Text</strong>: {{example.text}}</p>
-          <p>
-            <strong>Description:</strong> {{example.description}}</p>
-            <a href="/">← Back To Home</a>
+    <div class="col-10">
+      <form id="cms" action="/houses/{{id}}/people" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input placeholder="Full Name" type="text" class="form-control" id="name" name="name">
+          <br />
+          <label for="age">Age:</label>
+          <input placeholder="Age" class="form-control" id="age" name="age"></input>
+          <br />
+          <label for="pets">Pets:</label>
+          <input type="checkbox" name="pets" value=true > I have pet<br>
+          <br />
+          <label for="disability">Disability or Special Condition:</label>
+          <input placeholder="Disabilities or Special Condition" type="text" class="form-control" id="disability" name="disability" >
+          <br />
+          <label for="picture">User Picture (optional):</label>
+          <form method="POST" action="getdata.php" enctype="multipart/form-data">
+          <input type="file" name="userimage">
+          <input type="submit" name="submit_image" value="Upload">
+          </form>
+          <button type="submit" class="btn btn-success submit">Submit</button>
+        </div>
+			</form>
+    </div>
+
+    {{#each houses.People}}
+     <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Example</h5>
+        <p>
+          <strong>ID</strong>: {{this.id}}</p>
+        <p>
+          <strong>Name</strong>: {{this.name}}</p>
+        <p>
+          <strong>Age:</strong> {{this.age}}</p>
+        <p>
+          <strong>Disability:</strong> {{this.disability}}</p>
         </div>
       </div>
+    {{/each}}
+       <a href="/">← Back To Home</a>
     </div>
   </div>
 </div>
+
