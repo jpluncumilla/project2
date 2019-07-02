@@ -13,6 +13,7 @@ module.exports = function(app) {
     });
   });
 
+<<<<<<< HEAD
   // Load House page and pass in a House by id
   app.get("/houses/:id", function(req, res) {
     db.House.findOne({
@@ -30,6 +31,13 @@ module.exports = function(app) {
       where: { id: req.params.id },
       include: [db.People]
     }).then(function(dbHouse) {
+=======
+  // Load example page and pass in an example by id
+  app.get("/example/:id", function(req, res) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function(
+      dbExample
+    ) {
+>>>>>>> 7ed1af6b47fc4c273664709eeb8254605a6a9abd
       res.render("example", {
         houses: dbHouse,
         id: req.params.id
