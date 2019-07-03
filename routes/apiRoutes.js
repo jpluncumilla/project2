@@ -54,7 +54,6 @@ module.exports = function(app) {
     var { address } = req.body;
     var code = await geoCode(address);
 
-<<<<<<< HEAD
     req.body.point = sequelize.fn('ST_GeomFromText', `POINT(${code[0].latitude} ${code[0].longitude})`)
  
     console.log(req.body)
@@ -67,14 +66,6 @@ module.exports = function(app) {
   app.delete("/api/houses/:id", function(req, res) {
     db.House.destroy({ where: { id: req.params.id } }).then(function(dbHouse) {
       res.json(dbHouse);
-=======
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
->>>>>>> 7ed1af6b47fc4c273664709eeb8254605a6a9abd
     });
   });
 };
