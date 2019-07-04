@@ -34,31 +34,6 @@ var API = {
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshHouses = function() {
   window.location.reload();
- // API.getHouses().then(function(data) {
-  //   var $houses = data.map(function(house) {
-  //     var $a = $("<a>")
-  //       .text(house.address)
-  //       .attr("href", "/house/" + house.id);
-
-  //     var $li = $("<li>")
-  //       .attr({
-  //         class: "list-group-item",
-  //         "data-id": house.id
-  //       })
-  //       .append($a);
-
-  //     var $button = $("<button>")
-  //       .addClass("btn btn-danger float-right delete")
-  //       .text("ｘ");
-
-  //     $li.append($button);
-
-  //     return $li;
-  //   });
-
-  //   $houseList.empty();
-  //   $houseList.append($houses);
-  // });
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -99,4 +74,4 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$houseList.on("click", ".delete", handleDeleteBtnClick);
+$(".delete").click(handleDeleteBtnClick);

@@ -28,14 +28,14 @@
                 {{this.People.length}}
               </td>
               <td><a href="houses/{{this.id}}/people">Add A person</a></td>
-              <td><button class="btn btn-danger float-right delete">ｘ</button></td>
+              <td data-id="{{this.id}}"><button class="btn btn-danger float-right delete">ｘ</button></td>
             </tr>
             {{/each}}
           </tbody>
         </table>
          <form class="clearfix mb-4" action="POST">
                 <div class="form-group">
-                  <input type="text" id="house-address" class="form-control" aria-describedby="house-text" placeholder="Please enter your Address">
+                  <input type="text" class="form-control" aria-describedby="house-text" placeholder="Please enter your Address"id="house-address" name="address">
                   </div>
                   <button id="submit" class="btn btn-primary float-right">Add Your Address</button>
               
@@ -44,8 +44,8 @@
         <ul id="house-list" class="list-group">
           {{#each houses}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.address}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
+            <a href="houses/{{this.id}}/people">{{this.address}}</a>
+            <button id="delete" class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
         </ul>

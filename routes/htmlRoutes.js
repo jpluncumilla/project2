@@ -31,7 +31,7 @@ module.exports = function(app) {
       include: [db.People]
     }).then(function(dbHouse) {
       res.render("example", {
-        houses: dbHouse,
+        house: dbHouse,
         id: req.params.id
       });
     });

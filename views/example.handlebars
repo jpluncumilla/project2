@@ -1,4 +1,11 @@
 <div class="container">
+  <div class="card">
+  <div class="card-body">
+   
+    <h3>{{this.house.address}}</h3>
+   
+  </div>
+</div>
   <div class="row">
     <div class="col-10">
       <form id="cms" action="/houses/{{id}}/people" method="POST">
@@ -25,10 +32,10 @@
 			</form>
     </div>
 
-    {{#each houses.People}}
+    {{#each house.People}}
      <div class="card mt-4">
       <div class="card-body">
-        <h5 class="card-title">Example</h5>
+        <h5 class="card-title">Personal Information</h5>
         <p>
           <strong>ID</strong>: {{this.id}}</p>
         <p>
