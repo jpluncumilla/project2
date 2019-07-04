@@ -27,7 +27,7 @@ return new Promise((resolve, reject) =>  geocoder.geocode(address, function(err,
 
   resolve(data)
 }))
-}
+};
 module.exports = function(app) {
   // Get all houses
   app.get("/api/houses", function(req, res) {
@@ -38,13 +38,24 @@ module.exports = function(app) {
     });
   });
 
+
+  app.get("/api/houses/points", function(req, res) {
+    db.House.findAll({
+      include: [db.People]
+    }).then(function(dbHouse) {
+
+      res.json(dbHouse.map((house) => ({  id: house.id, point: house.point})));
+    });
+  });
+  
+
   app.get("/api/houses/:id", function(req, res) {
     // 2; Add a join to include all of the House's People here
     db.House.findOne({
       where: {
         id: req.params.id,
-        include: [db.People]
-      }
+      },
+      include: [db.People]
     }).then(function(dbHouse) {
       res.json(dbHouse);
     });
@@ -61,6 +72,7 @@ module.exports = function(app) {
       res.json(dbHouse);
     });
   });
+
 
   // Delete an House by id
   app.delete("/api/houses/:id", function(req, res) {
