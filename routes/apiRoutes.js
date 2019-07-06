@@ -6,7 +6,7 @@ var geoCode = function(address){
   // Replace with your mapquest consumer API key
 var options = {
   provider: "mapquest",
-  apiKey: "y0R1dFvQ1GY6Gkd9FmGAOeMDSJtTXAZq"
+  apiKey: process.env.GEOCODE_APIKEY
 };
 
 var geocoder = NodeGeocoder(options);
@@ -81,4 +81,3 @@ module.exports = function(app) {
     });
   });
 };
-

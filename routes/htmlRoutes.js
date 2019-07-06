@@ -1,12 +1,17 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Load index page
+  
   app.get("/", function(req, res) {
+    res.render("index")
+  });
+
+  // Load index page
+  app.get("/form", function(req, res) {
     db.House.findAll({
       include: [db.People]
     }).then(function(dbHouse) {
-      res.render("index", {
+      res.render("form", {
         msg: "Welcome!",
         houses: dbHouse
       });
@@ -31,7 +36,7 @@ module.exports = function(app) {
       include: [db.People]
     }).then(function(dbHouse) {
       res.render("example", {
-        house: dbHouse,
+        houses: dbHouse,
         id: req.params.id
       });
     });
