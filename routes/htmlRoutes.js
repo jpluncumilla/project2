@@ -1,9 +1,8 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  
   app.get("/", function(req, res) {
-    res.render("index")
+    res.render("index");
   });
 
   // Load index page
@@ -30,7 +29,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/houses/:id/people", function(req, res){
+  app.get("/houses/:id/people", function(req, res) {
     db.House.findOne({
       where: { id: req.params.id },
       include: [db.People]
@@ -42,19 +41,19 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/houses/:id/people", function(req, res){
-    var { name, age, pets, disability  } = req.body
+  app.post("/houses/:id/people", function(req, res) {
+    var { name, age, pets, disability } = req.body;
     db.People.create({
       HouseId: req.params.id,
       name,
       disability,
       age,
       pets: pets === "true"
-    }).then(function(){
-      var link = `/houses/${req.params.id}/people`
-      return res.redirect(link)
+    }).then(function() {
+      var link = `/houses/${req.params.id}/people`;
+      return res.redirect(link);
     });
-  })
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
