@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "process.env.MYSQL_PASSWORD",
+    "password": "Thisisit1",
     "database": "project2",
     "host": "localhost",
     "dialect": "mysql"
