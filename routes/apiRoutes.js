@@ -11,9 +11,6 @@ var geoCode = function(address) {
 
   var geocoder = NodeGeocoder(options);
 
-  // Get all elements in process.argv, starting from index 2 to the end
-  // Join them into a string to get the space delimited address
-
   // Then use the Google Geocoder to geocode the address
   return new Promise((resolve, reject) =>
     geocoder.geocode(address, function(err, data) {
@@ -44,6 +41,24 @@ module.exports = function(app) {
       include: [db.People]
     }).then(function(dbHouse) {
       res.json(dbHouse.map(house => ({ id: house.id, point: house.point })));
+    });
+  });
+
+  app.get("/api/people", function(req, res) {
+    db.People.findAll({
+      include: [db.House]
+    }).then(function(dbPeople) {
+      res.json(dbPeople);
+    });
+  });
+
+  app.get("/api/people/pics", function(req, res) {
+    db.People.findAll({
+      include: [db.House]
+    }).then(function(dbPeople) {
+      res.json(
+        dbPeople.map(people => ({ id: people.id, picture: people.picture }))
+      );
     });
   });
 

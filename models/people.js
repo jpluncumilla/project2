@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     pets: DataTypes.BOOLEAN,
     disability: DataTypes.STRING,
     picture: {
-      type: DataTypes.BLOB("long")
+      type: DataTypes.STRING
     }
   });
   People.associate = function(models) {

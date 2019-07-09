@@ -1,58 +1,26 @@
+<body id="form-body">
+  <div class="form-overlay"></div>
+  <div id="modal-form">I'm the modal window!</div>
 <div id="home">
   <div class="container">
-    <div class="row">
+    <div class="jumbotron">
+  <h4>Disaster Relief When You Most Need It Starts Here</h4>
+   <div class="row top-buffer d-flex justify-content-center">
       <div class="col-10">
-        <h1>{{msg}}</h1>
-        <h2>Disaster Relief App</h2>
-      </div>
-    </div> 
-    <div class="row top-buffer">
-      <div class="col-10">
-        <h3>Registration Form</h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Address</th>
-              <th>Num Of People</th>
-              <th>Add a Person</th>
-              <th>Delete Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each houses}}
-            <tr id="form-row">
-              <td>
-                {{this.address}}
-              </td>
-              <td>
-                {{this.People.length}}
-              </td>
-              <td><a href="houses/{{this.id}}/people">Add A person</a></td>
-              <td data-id="{{this.id}}"><button class="btn btn-danger float-right delete">ｘ</button></td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-         <form class="clearfix mb-4" action="POST">
-                <div class="form-group">
-                  <input type="text" class="form-control" aria-describedby="house-text" placeholder="Please enter your Address"id="house-address" name="address">
-                  </div>
-                  <button id="submit" class="btn btn-primary float-right">Add Your Address</button>
-              
-              </form>
-        <h3>Houses:</h3>
-        <ul id="house-list" class="list-group">
-          {{#each houses}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="houses/{{this.id}}/people">{{this.address}}</a>
-            <button id="delete" class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group" >
+            <input type="text" class="form-control" aria-describedby="house-text"
+              placeholder="Please enter your Address" id="house-address" name="address">
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Add Your Address</button>
+        </form>
       </div>
     </div>
   </div>
-</div> 
+</div>
+</div>
+</body>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

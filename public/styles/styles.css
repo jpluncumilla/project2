@@ -327,3 +327,62 @@ header {
         box-shadow: 0 0 15px black;
         text-align: left;
       }
+
+@import url(https://fonts.googlea pis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Federo);
+@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
+
+
+
+/* overlay styles, all needed */
+.form-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9;
+}
+
+/* just some content with arbitrary styles for explanation purposes */
+#modal-form {
+    width: 300px;
+    height: 200px;
+    line-height: 200px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    background-color: #f1c40f;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+h4 {
+  font-family: 'Kanit', sans-serif;
+    text-align: center;
+    display: block;
+}
+
+.form-control {
+  align: center;
+  display: block;
+}
+
+#submit {
+  
+}
+#form-body {
+    background-image: url('https://media.giphy.com/media/xCpz28xnEPdDi/giphy.gif');
+    background-size:cover;                     
+    background-repeat:no-repeat;
+    background-position:bottom bottom;
+    height: 100%;
+    resize: both;
+    overflow: auto;
+    object-fit: fill;
+   
+    
+}
