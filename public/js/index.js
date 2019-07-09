@@ -1,62 +1,38 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $addressInput = $("#house-address");
+// var $housePoint = $("#point");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveHouse: function(house) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/houses",
+      data: JSON.stringify(house)
     });
   },
-  getExamples: function() {
+
+  getHouses: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/houses",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteHouse: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/houses/" + id,
       type: "DELETE"
     });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
+var refreshHouses = function() {
+  window.location.reload();
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -64,22 +40,21 @@ var refreshExamples = function() {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var house = {
+    address: $addressInput.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  // (!(house.address && house.point))
+  if (!house.address) {
+    alert("You must enter an address!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveHouse(house).then(function(data) {
+    window.location.href = `houses/${data.id}/people`;
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $addressInput.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -89,11 +64,16 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteHouse(idToDelete).then(function() {
+    refreshHouses();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$(".delete").click(handleDeleteBtnClick);
+
+$("#modal-form").click(function(){
+  $("#modal-form").hide();
+  $(".form-overlay").hide();
+});
