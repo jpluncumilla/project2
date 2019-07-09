@@ -1,4 +1,22 @@
+/* eslint-disable camelcase */
+var multer = require("multer");
+var cloudinary = require("cloudinary");
 var db = require("../models");
+
+cloudinary.config({
+  cloud_name: "self2322",
+  api_key: "315341843434128",
+  api_secret: "DrWWVR-5tcuosRxLWYIygBhbsWA"
+});
+
+const storage = multer.diskStorage({
+  destination: "./files",
+  filename(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
 
 module.exports = function(app) {
   app.get("/", function(req, res) {
@@ -7,12 +25,13 @@ module.exports = function(app) {
 
   // Load index page
   app.get("/form", function(req, res) {
-    db.House.findAll({
+    db.House.findOne({
+      order: [["id", "DESC"]],
       include: [db.People]
     }).then(function(dbHouse) {
       res.render("form", {
         msg: "Welcome!",
-        houses: dbHouse
+        house: dbHouse
       });
     });
   });
@@ -41,17 +60,24 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/houses/:id/people", function(req, res) {
+  app.post("/houses/:id/people", upload.single("file"), function(req, res) {
     var { name, age, pets, disability } = req.body;
-    db.People.create({
-      HouseId: req.params.id,
-      name,
-      disability,
-      age,
-      pets: pets === "true"
-    }).then(function() {
-      var link = `/houses/${req.params.id}/people`;
-      return res.redirect(link);
+    cloudinary.v2.uploader.upload(`./files/${req.file.originalname}`, function(
+      error,
+      result
+    ) {
+      console.log("====result", result);
+      db.People.create({
+        HouseId: req.params.id,
+        name,
+        disability,
+        age,
+        pets: pets === "true",
+        picture: result.url
+      }).then(function() {
+        var link = `/houses/${req.params.id}/people`;
+        return res.redirect(link);
+      });
     });
   });
 

@@ -39,7 +39,6 @@ var refreshHouses = function() {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-  // point: $housePoint.val().trim()
 
   var house = {
     address: $addressInput.val().trim()
@@ -51,12 +50,11 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveHouse(house).then(function() {
-    refreshHouses();
+  API.saveHouse(house).then(function(data) {
+    window.location.href = `houses/${data.id}/people`;
   });
 
   $addressInput.val("");
-  // $housePoint.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -74,3 +72,8 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $(".delete").click(handleDeleteBtnClick);
+
+$("#modal-form").click(function(){
+  $("#modal-form").hide();
+  $(".form-overlay").hide();
+});
