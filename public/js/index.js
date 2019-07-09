@@ -2,7 +2,6 @@
 var $addressInput = $("#house-address");
 // var $housePoint = $("#point");
 var $submitBtn = $("#submit");
-var $houseList = $("#house-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
