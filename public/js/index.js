@@ -76,4 +76,11 @@ $(".delete").click(handleDeleteBtnClick);
 $("#modal-form").click(function(){
   $("#modal-form").hide();
   $(".form-overlay").hide();
+  $("#home").show();
+});
+
+$(".form-overlay").click(function() {
+  $("#modal-form").hide();
+  $(".form-overlay").hide();
+  $("#home").show();
 });

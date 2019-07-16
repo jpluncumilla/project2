@@ -87,7 +87,7 @@ p:last-child {
   overflow: auto;
   color: #ffffff;
   background-color: white;
-  margin-left: -16px;
+  /* margin-left:  */
 }
 
 #logo {
@@ -328,61 +328,80 @@ header {
         text-align: left;
       }
 
-@import url(https://fonts.googlea pis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css?family=Federo);
+@import url(https://fonts.googleapis.com/css?family=Kanit&display=swap);
 @import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Kanit|ZCOOL+KuaiLe&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 
 /* overlay styles, all needed */
 .form-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9;
 }
 
 /* just some content with arbitrary styles for explanation purposes */
 #modal-form {
-    width: 300px;
-    height: 200px;
-    line-height: 200px;
-    position: fixed;
-    top: 50%; 
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -150px;
-    background-color: #f1c40f;
-    border-radius: 5px;
-    text-align: center;
-    z-index: 11; /* 1px higher than the overlay layer */
+  width: 900px;
+  height:350px;
+  line-height: 20px;
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -450px;
+  background-color:whitesmoke;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  z-index: 11; /* 1px higher than the overlay layer */
 }
 h4 {
-  font-family: 'Kanit', sans-serif;
-    text-align: center;
-    display: block;
-}
-
-.form-control {
-  align: center;
+font-family: 'Kanit', sans-serif;
+  text-align: center;
   display: block;
-}
-
-#submit {
   
 }
-#form-body {
-    background-image: url('https://media.giphy.com/media/xCpz28xnEPdDi/giphy.gif');
-    background-size:cover;                     
-    background-repeat:no-repeat;
-    background-position:bottom bottom;
-    height: 100%;
-    resize: both;
-    overflow: auto;
-    object-fit: fill;
-   
-    
+.form-control {
+box-align: center;
+display: block;
 }
+
+#form-body {
+  background-image: url('https://media.giphy.com/media/xCpz28xnEPdDi/giphy.gif');
+  background-size:cover;                     
+  background-repeat:no-repeat;
+  background-position:bottom bottom;
+  height: 100%;
+  resize: both;
+  overflow: auto;
+  object-fit: fill; 
+}
+#home {
+ display: none;
+}
+
+#jumbotron-form{
+  overflow:hidden;
+  top-margin: 200px;
+  border-top: 200px;
+  padding-top: 200px;
+}
+
+#modal-form-header{
+  text-decoration: underline;
+}
+
+#modal-form-text{
+  font-family: 'Josefin Sans', sans-serif;
+}
+  

@@ -4,9 +4,9 @@ var cloudinary = require("cloudinary");
 var db = require("../models");
 
 cloudinary.config({
-  cloud_name: "self2322",
-  api_key: "315341843434128",
-  api_secret: "DrWWVR-5tcuosRxLWYIygBhbsWA"
+  cloud_name: "self5656",
+  api_key: "311159841643578",
+  api_secret: "jh_BK_qs8aj9mEdf5Za8CwGtW_g"
 });
 
 const storage = multer.diskStorage({
@@ -62,25 +62,37 @@ module.exports = function(app) {
 
   app.post("/houses/:id/people", upload.single("file"), function(req, res) {
     var { name, age, pets, disability } = req.body;
-    cloudinary.v2.uploader.upload(`./files/${req.file.originalname}`, function(
-      error,
-      result
-    ) {
-      console.log("====result", result);
+    if (req.file) {
+      cloudinary.v2.uploader.upload(
+        `./files/${req.file.originalname}`,
+        function(error, result) {
+          console.log("====result", result);
+          db.People.create({
+            HouseId: req.params.id,
+            name,
+            disability,
+            age,
+            pets: pets === "true",
+            picture: result.url
+          }).then(function() {
+            var link = `/houses/${req.params.id}/people`;
+            return res.redirect(link);
+          });
+        }
+      );
+    } else {
       db.People.create({
         HouseId: req.params.id,
         name,
         disability,
         age,
-        pets: pets === "true",
-        picture: result.url
+        pets: pets === "true"
       }).then(function() {
         var link = `/houses/${req.params.id}/people`;
         return res.redirect(link);
       });
-    });
+    }
   });
-
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
