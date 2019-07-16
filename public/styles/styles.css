@@ -328,7 +328,7 @@ header {
         text-align: left;
       }
 
-@import url(https://fonts.googlea pis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://fonts.googleapis.com/css?family=Federo);
 @import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
 
@@ -367,13 +367,10 @@ h4 {
 }
 
 .form-control {
-  align: center;
+  align-items: center;
   display: block;
 }
 
-#submit {
-  
-}
 #form-body {
     background-image: url('https://media.giphy.com/media/xCpz28xnEPdDi/giphy.gif');
     background-size:cover;                     
