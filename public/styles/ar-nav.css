@@ -1,0 +1,85 @@
+HTML  CSS Result
+EDIT ON
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Federo);
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative; /* needed for the overlay to extend when you scroll */
+    /* general styles */
+    padding: 30px;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+}
+
+/* overlay styles, all needed */
+.form-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+/* just some content with arbitrary styles for explanation purposes */
+#modal-form {
+    width: 350px;
+    height: 400px;
+    line-height: 200px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -175px;
+    background-color: #f1c40f;
+    border-radius: 5px;
+    text-align: center;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; 
+
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+
+.content {
+    margin: 30px;
+}
+
+h1 {
+    font-family: 'Federo', sans-serif;
+}
+
+    
+    .service-list {
+        list-style-type: none;
+        margin-left:0px;
+        padding-left:0px;
+        display: inline-block;
+        }
+        
+        .service-list img
+        {
+        float:left;
+        margin-right: 28px;
+        display: inline-block;
+        }
+        
+        .service-list div {
+        text-align: left; 
+        line-height:1em;
+        padding: 0;
+        padding-bottom: 2em;
+        float:left;
+        display: inline-block;
+        }
+
+        div p br {
+            line-height:1em;
+            display: block;
+            margin: 10px 0;
+         }

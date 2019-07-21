@@ -2,6 +2,9 @@
 var multer = require("multer");
 var cloudinary = require("cloudinary");
 var db = require("../models");
+var fuzzybit = {};
+var path = require('path');
+    console.log(__dirname + "/../ar-nav/a-frame-webcam-primitive.html");
 
 cloudinary.config({
   cloud_name: "self5656",
@@ -93,6 +96,31 @@ module.exports = function(app) {
       });
     }
   });
+
+  app.get("/auth", function(req, res) {
+    // if(req.get('Referrer') == 'https://iamjpyo.github.io'){
+    fuzzybit[req.sessionID] = Math.random()
+      .toString(32)
+      .substring(2);
+    res.redirect(302, "/marker/" + fuzzybit[req.sessionID]);
+    // }
+  });
+
+  app.get("/marker/:fuzzybit", function(req, res) {
+    console.log("user is abour to logged in with sessionID: " + req.sessionID);
+    console.log("sessionid is: " + Object.keys(fuzzybit));
+    // eslint-disable-next-line eqeqeq
+    if (req.params.fuzzybit == fuzzybit[req.sessionID]) {
+      console.log("user is abour to logged in with sessionID: " + req.sessionID);
+      res.sendFile(path.join(__dirname + "/../ar-nav/a-frame-webcam-primitive.html"));
+      delete fuzzybit[req.sessionID];
+      console.log("user has logged in");
+    } 
+    else {
+      res.redirect(302, "https://iamjpyo.github.io/QRcode/");
+    }
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
