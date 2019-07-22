@@ -1,5 +1,6 @@
 require("dotenv").config();
 var express = require("express");
+var cookieParser = require("cookie-parser");
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
@@ -11,6 +12,15 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+var session = require("express-session");
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "project2groupfamstring", // just a long random string
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
 // Handlebars
 app.engine(
