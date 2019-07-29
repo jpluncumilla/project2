@@ -11,33 +11,49 @@ The user can add their address and then they will take to another page where can
 
 In the rescuers side the App give them a kind of beacon through their cellphones camera or another device. The App will show a marker in each address with information about that address.
 
-### Who is Disaster Relief App? 
+### What is the Disaster Relief App? 
 
-Basically, Disaster Relief App is for everyone.
+The Disaster Relief App is disigned to aid rescuers in locating and accessing the need of civilians in during or after a Disaster.
 
 #### Starting Steps: 
-1. First type in your address. **This is required** 
-2. Add the information for each person living in that address: 
+1. On the homepage got to "Find me" 
+2. First type in your address. **This is required** 
+3. Add the information for each person living in that address: 
     * Name 
     * Age
     * Any pet in that address?
     * Disability or Special Condition
-3. Then press **submit**!
+4. Then press **submit**!
+
+#### Rescuer Usage instructions:
+1. On the homepage got to "QR Login"
+2.Scan the designnated login QR Code.
+3.proceed to a red marker(Downward pointing arrow).
+4. once you are close proximity tap the marker a popup will appear with the residents':
+    * Name 
+    * Age
+    * Any pet in that address?
+    * Disability or Special Condition
+When tapped the marker will turn green to confirm it has been viewed.
+To close the popup tap anywhere outside of the popup.
+
+
 
 ## Built With
 
 * CSS 
 * HTML 
-* BOOTSTRAP
+* [BOOTSTRAP](https://getbootstrap.com/)
 * JAVASCRIPT
-* JQUERY
+* [JQUERY](https://jquery.com/)
+* [A-Frame](https://aframe.io/)
 * NODE.JS
 * EXPRESS.JS
 * EXPRESS-HANDLEBARS
 * SEQUELIZE 
 * MySQL
-* CLOUDINARY
-* MAP QUEST API
+* [CLOUDINARY](https://cloudinary.com/)
+* [MAP QUEST API](https://developer.mapquest.com/documentation/)
 
 ## Developers
 
