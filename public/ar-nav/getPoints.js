@@ -9,7 +9,7 @@ function spawnMarkers() {
       let crossPos = "'longitude: " + posY + ";" + "latitude: " + posX + "'";
 
       let newEnt = $("<a-obj-model gps-place=" + crossPos + ">");
-      newEnt.attr("data-id", i+1);
+      newEnt.attr("houseid", i + 1);
       newEnt.attr({
         //    "gps-place": crossPos,
         id: "house" + i,
