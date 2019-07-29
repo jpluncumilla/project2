@@ -27,15 +27,16 @@ The Disaster Relief App is disigned to aid rescuers in locating and accessing th
 
 #### Rescuer Usage instructions:
 1. On the homepage got to "QR Login"
-2.Scan the designnated login QR Code.
-3.proceed to a red marker(Downward pointing arrow).
+2. Scan the designnated login QR Code.
+3. proceed to a red marker(Downward pointing arrow).
 4. once you are close proximity tap the marker a popup will appear with the residents':
     * Name 
     * Age
     * Any pet in that address?
     * Disability or Special Condition
+0. (Additinal details.)    
 When tapped the marker will turn green to confirm it has been viewed.
-To close the popup tap anywhere outside of the popup.
+<br />To close the popup tap anywhere outside of the popup.
 
 
 
