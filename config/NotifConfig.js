@@ -1,8 +1,8 @@
 //Initialize
 var myPushNotifications = new PushNotificationsApiKey(
   PushNotifications.Region.US_SOUTH,
-  "your-bluemix-app-guid",
-  "your-bluemix-push-apikey"
+  "afd13273-f2b0-435e-a9dc-846816051e73",
+  "E09aU9l0GdAPzxupTlQPMhObkslsRYnl7WqJ_l36_1Cv"
 );
 
 // Get authtoken
