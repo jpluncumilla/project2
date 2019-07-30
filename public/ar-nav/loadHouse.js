@@ -24,35 +24,42 @@ function loadHouseFunc(id) {
 
     let person = null;
     $.getJSON("/api/houses/" + id, function(json) {
-      for (let i = 0; i < json.People.length; i++) {
-        person = genericFamMember;
-        let j = json.People[i].id;
-        let picture = $(
-          '<img id="' +
-            j +
-            '" src="' +
-            json.People[i].picture +
-            '" alt="person Image" width="120" height="120">'
-        );
-        picture.attr("onerror", "this.onerror=null; this.src='avatar.svg'");
+      if (json.People.length != null) {
+        for (let i = 0; i < json.People.length; i++) {
+          person = genericFamMember;
+          let j = json.People[i].id;
+          let picture = $(
+            '<img id="' +
+              j +
+              '" src="' +
+              json.People[i].picture +
+              '" alt="person Image" width="120" height="120">'
+          );
+          picture.attr(
+            "onerror",
+            "this.onerror=null; this.src='../ar-nav/avatar.svg'"
+          );
 
-        let personStats =
-          " Age: " +
-          json.People[i].age +
-          "<br> Disability: " +
-          json.People[i].disability +
-          "<br> Has pets? " +
-          hasPets(json.People[i].pets);
-        let groupedStats = $("<div class='row'>");
-        picture.appendTo(person);
-        $("<h3>")
-          .html(json.People[i].name)
-          .appendTo(groupedStats);
-        $("<p>")
-          .html(personStats)
-          .appendTo(groupedStats);
-        groupedStats.appendTo(person);
-        person.appendTo(famModal);
+          let personStats =
+            " Age: " +
+            json.People[i].age +
+            "<br> Disability: " +
+            json.People[i].disability +
+            "<br> Has pets? " +
+            hasPets(json.People[i].pets);
+          let groupedStats = $("<div class='row'>");
+          picture.appendTo(person);
+          $("<h3>")
+            .html(json.People[i].name)
+            .appendTo(groupedStats);
+          $("<p>")
+            .html(personStats)
+            .appendTo(groupedStats);
+          groupedStats.appendTo(person);
+          person.appendTo(famModal);
+        }
+      } else {
+        famModal.html("<h3>This house does not have any listed residents</h3>");
       }
     });
     openned = true;

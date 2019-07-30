@@ -23,7 +23,7 @@ function spawnMarkers() {
       newEnt.appendTo("#a-marker-group");
     }
 
-    console.log("JSON Data: " + json[0].point.coordinates[0]);
+   // console.log("JSON Data: " + json[0].point.coordinates[0]);
   });
 }
 //$("<a-sphere>")
