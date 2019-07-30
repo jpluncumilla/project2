@@ -1,7 +1,14 @@
 require("dotenv").config();
+require("./config/NotifConfig.js");
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var exphbs = require("express-handlebars");
+
+//IBM Notifications
+var PushNotifications = require('ibm-push-notifications').PushNotifications;
+var Notification = require('ibm-push-notifications').Notification;
+var PushMessageBuilder = require('ibm-push-notifications').PushMessageBuilder;
+var PushNotificationsApiKey = require('ibm-push-notifications').PushNotificationsWithApiKey;
 
 var db = require("./models");
 

@@ -1,0 +1,4 @@
+{
+  "name": "Disaster Relief App",
+  "gcm_sender_id": "207779639497" // remove this if you are using the `ApplicationServerKey` in push initiaization
+}
