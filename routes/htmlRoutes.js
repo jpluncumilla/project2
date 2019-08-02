@@ -1,10 +1,9 @@
-require("/config/NotifConfig.js");
-/* eslint-disable camelcase */
 var multer = require("multer");
 var cloudinary = require("cloudinary");
 var db = require("../models");
 var fuzzybit = {};
-var path = require('path');
+var rescuerCount;
+var path = require("path");
 //console.log(__dirname + "/../ar-nav/a-frame-webcam-primitive.html");
 
 cloudinary.config({
@@ -22,17 +21,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-module.exports = function (app) {
-  app.get("/", function (req, res) {
+module.exports = function(app) {
+  app.get("/", function(req, res) {
     res.render("index");
   });
 
   // Load index page
-  app.get("/form", function (req, res) {
+  app.get("/form", function(req, res) {
     db.House.findOne({
       order: [["id", "DESC"]],
       include: [db.People]
-    }).then(function (dbHouse) {
+    }).then(function(dbHouse) {
       res.render("form", {
         msg: "Welcome!",
         house: dbHouse
@@ -41,22 +40,22 @@ module.exports = function (app) {
   });
 
   // Load House page and pass in a House by id
-  app.get("/houses/:id", function (req, res) {
+  app.get("/houses/:id", function(req, res) {
     db.House.findOne({
       where: { id: req.params.id },
       include: [db.People]
-    }).then(function (dbHouse) {
+    }).then(function(dbHouse) {
       res.render("house", {
         houses: dbHouse
       });
     });
   });
 
-  app.get("/houses/:id/people", function (req, res) {
+  app.get("/houses/:id/people", function(req, res) {
     db.House.findOne({
       where: { id: req.params.id },
       include: [db.People]
-    }).then(function (dbHouse) {
+    }).then(function(dbHouse) {
       res.render("example", {
         houses: dbHouse,
         id: req.params.id
@@ -64,12 +63,12 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/houses/:id/people", upload.single("file"), function (req, res) {
+  app.post("/houses/:id/people", upload.single("file"), function(req, res) {
     var { name, age, pets, disability } = req.body;
     if (req.file) {
       cloudinary.v2.uploader.upload(
         `./files/${req.file.originalname}`,
-        function (error, result) {
+        function(error, result) {
           console.log("====result", result);
           db.People.create({
             HouseId: req.params.id,
@@ -78,7 +77,7 @@ module.exports = function (app) {
             age,
             pets: pets === "true",
             picture: result.url
-          }).then(function () {
+          }).then(function() {
             var link = `/houses/${req.params.id}/people`;
             return res.redirect(link);
           });
@@ -91,14 +90,14 @@ module.exports = function (app) {
         disability,
         age,
         pets: pets === "true"
-      }).then(function () {
+      }).then(function() {
         var link = `/houses/${req.params.id}/people`;
         return res.redirect(link);
       });
     }
   });
 
-  app.get("/auth", function (req, res) {
+  app.get("/auth", function(req, res) {
     // if(req.get('Referrer') == 'https://iamjpyo.github.io'){
     fuzzybit[req.sessionID] = Math.random()
       .toString(32)
@@ -107,26 +106,45 @@ module.exports = function (app) {
     // }
   });
 
-  app.get("/marker/:fuzzybit", function (req, res) {
+  app.get("/marker/:fuzzybit", function(req, res) {
     console.log("user is abour to logged in with sessionID: " + req.sessionID);
     console.log("sessionid is: " + Object.keys(fuzzybit));
-    // eslint-disable-next-line eqeqeq
-    if (req.params.fuzzybit == fuzzybit[req.sessionID]) {
-      console.log("user is abour to logged in with sessionID: " + req.sessionID);
-      res.sendFile(path.join(__dirname + "/../ar-nav/a-frame-webcam-primitive.html"));
-      delete fuzzybit[req.sessionID];
-      var message = PushMessageBuilder.Message.alert("Help is on the way")
-        .url("www.ibm.com").build();
-      var notificationExample = Notification.message(message).build();
-      console.log("user has logged in");
-    }
-    else {
-      res.redirect(302, "https://iamjpyo.github.io/QRcode/");
+    console.log(
+      "user is abour to logged in with sessionID: " +
+        (req.headers.referrer || req.headers.referer)
+    );
+    if (
+      // eslint-disable-next-line eqeqeq
+      (req.headers.referrer || req.headers.referer) ==
+      "https://iamjpyo.github.io/"
+    ) {
+      //dynamically generates the rescuer augment reality navigator url
+      // eslint-disable-next-line eqeqeq
+      if (req.params.fuzzybit == fuzzybit[req.sessionID]) {
+        console.log(
+          "user is about to logged in with sessionID: " + req.sessionID
+        );
+        res.sendFile(
+          path.join(__dirname + "/../ar-nav/a-frame-webcam-primitive.html")
+        );
+        delete fuzzybit[req.sessionID];
+        console.log("rescuer has logged in");
+        //check if 5 or more rescuers have logged in and notifies civilians help is on the way
+        if ((rescuerCount = 5)) {
+          require("./notifConfig");
+        } else {
+          rescuerCount += 1;
+        }
+      } else {
+        res.redirect(302, "https://iamjpyo.github.io/QRcode/");
+      }
+    } else {
+      res.redirect(302, "https://www.google.com");
     }
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
   });
 };

@@ -38,7 +38,12 @@ The Disaster Relief App is designed to aid rescuers in locating and accessing th
 When tapped the marker will turn green to confirm it has been viewed.
 <br />To close the popup tap anywhere outside of the popup.
 
+### The QR
+* With the current iteration of authentication, once the QR is scanned the express server checks the packet header for the request for the "referrer" to confirm the QR is being scanned from the Disaster Relief App provided QR code scanner. If the referrer matches Disaster Relief App provided QR code scanner will got to the rescuer augment reality navigator, if not the page is redirected to the google homepage, This is to protect the privacy of any participants using this app.
 
+* once on the rescuer augment reality navigator the page url is generated dynamically and is not stored after load to ensure so the url cannot be saved to and distributed for malicious use, if the page is refreshed  the user will be directed to the QR scanner to rescan and as such re-authenticate.
+
+![alt QR Login](../media/images/QR.png?raw=true)
 
 ## Built With
 
