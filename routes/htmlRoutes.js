@@ -1,10 +1,10 @@
-/* eslint-disable camelcase */
 var multer = require("multer");
 var cloudinary = require("cloudinary");
 var db = require("../models");
 var fuzzybit = {};
-var path = require('path');
-    console.log(__dirname + "/../ar-nav/a-frame-webcam-primitive.html");
+var rescuerCount;
+var path = require("path");
+//console.log(__dirname + "/../ar-nav/a-frame-webcam-primitive.html");
 
 cloudinary.config({
   cloud_name: "self5656",
@@ -109,15 +109,37 @@ module.exports = function(app) {
   app.get("/marker/:fuzzybit", function(req, res) {
     console.log("user is abour to logged in with sessionID: " + req.sessionID);
     console.log("sessionid is: " + Object.keys(fuzzybit));
-    // eslint-disable-next-line eqeqeq
-    if (req.params.fuzzybit == fuzzybit[req.sessionID]) {
-      console.log("user is abour to logged in with sessionID: " + req.sessionID);
-      res.sendFile(path.join(__dirname + "/../ar-nav/a-frame-webcam-primitive.html"));
-      delete fuzzybit[req.sessionID];
-      console.log("user has logged in");
-    } 
-    else {
-      res.redirect(302, "https://iamjpyo.github.io/QRcode/");
+    console.log(
+      "user is abour to logged in with sessionID: " +
+        (req.headers.referrer || req.headers.referer)
+    );
+    if (
+      // eslint-disable-next-line eqeqeq
+      (req.headers.referrer || req.headers.referer) ==
+      "https://iamjpyo.github.io/"
+    ) {
+      //dynamically generates the rescuer augment reality navigator url
+      // eslint-disable-next-line eqeqeq
+      if (req.params.fuzzybit == fuzzybit[req.sessionID]) {
+        console.log(
+          "user is about to logged in with sessionID: " + req.sessionID
+        );
+        res.sendFile(
+          path.join(__dirname + "/../ar-nav/a-frame-webcam-primitive.html")
+        );
+        delete fuzzybit[req.sessionID];
+        console.log("rescuer has logged in");
+        //check if 5 or more rescuers have logged in and notifies civilians help is on the way
+        if ((rescuerCount = 5)) {
+          require("./notifConfig");
+        } else {
+          rescuerCount += 1;
+        }
+      } else {
+        res.redirect(302, "https://iamjpyo.github.io/QRcode/");
+      }
+    } else {
+      res.redirect(302, "https://www.google.com");
     }
   });
 
