@@ -14,7 +14,7 @@
     "cloudinary": "^1.14.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.2",
     "ibm-push-notifications": "^0.5.0",
